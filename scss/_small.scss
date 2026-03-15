@@ -1,0 +1,260 @@
+/* Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS.  */
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+/*  Apply a natural box layout model to all elements  */
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+} // end all elements
+
+
+/* --------------------------- BODY --------------------------- */
+body {
+    font-family: $defaultFont;
+    font-weight: $lightWeight;
+    min-width: 320px;
+}
+
+
+/* --------------------------- HEADER --------------------------- */
+#headerWrapper {border-bottom: 1px solid $greyColor;}
+header {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    column-gap: $gutter;
+    align-items: center; //vertically
+    padding: .5rem $gutter;
+    position: relative;
+    span {
+        font-size: 1.6rem;
+        font-weight: $normalWeight;
+        color: $primaryColor;
+        justify-self: start;
+    }
+} // end header
+
+
+/* --------------------------- NAVIGATION STUFF GOES HERE --------------------------- */
+
+#nav_container {
+    justify-self: end;
+
+    button::before{
+        content: "\2630";
+        font-size: 1.5rem;
+    }
+
+    button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        height: auto;
+        display: block;
+        
+    }
+
+    button.open::before {
+        content: "\2715";
+    }
+
+    ul {
+        display: none;
+    }
+
+    ul.open {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        right: $gutter;
+        background-color: #e3ecf8;
+        width: 200px;
+        top: 100%;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        li {
+            list-style: none;
+            width: 100%;
+            text-align: right;
+            a{
+                text-decoration: none;
+                width: 100%;
+                padding: 1rem 12px;
+                display: block;
+                color: $secondaryColor;
+                font-weight: $normalWeight;
+            }
+        }
+
+        li.active a {
+            background-color: $secondaryColor;
+            color: white;
+        }   
+    }
+
+
+}
+
+
+
+/* --------------------------- MAIN --------------------------- */
+main {
+    // illustrate the grid system with borders
+    .row{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 1rem .5rem;
+        .column {
+            margin: .5rem ($gutter / 2);
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 14px rgba(1, 55, 125, .10), 0 2px 6px rgba(13, 49, 58, .08);
+            transition: box-shadow .2s ease, transform .2s ease;
+
+            &:hover {
+                box-shadow: 0 12px 24px rgba(1, 55, 125, .16), 0 4px 10px rgba(13, 49, 58, .10);
+                transform: translateY(-2px);
+            }
+
+            h2{
+                margin: 1rem 0 0 0;
+                padding: 0 $gutter;
+            }
+
+            img{
+                width: 100%;
+                height: auto;
+                display: block;
+            }
+
+            button{
+                background-color: $primaryColor;
+                color: white;
+                border: none;
+                padding: .75rem 1.5rem;
+                margin: auto $gutter $gutter 0;
+                cursor: pointer;
+                font-size: 1rem;
+                border-radius: 4px;
+                align-self: flex-end;
+            }
+
+        }
+    }
+
+    h1 {
+        padding: 1rem $gutter.5rem $gutter;
+        font-size: 1.5rem;
+        color: $secondaryColor;
+        font-weight: $normalWeight;
+        margin: 0;
+    }
+
+
+    .row.why-choose {
+        .column ion-icon {
+            width: 64px;
+            height: 64px;
+            padding: .55rem;
+            margin: 1rem auto 1rem auto;
+            display: block;
+            color: $secondaryColor;
+            background-color: rgba(1, 55, 125, .10);
+            border: 2px solid rgba(1, 55, 125, .18);
+            border-radius: 14px;
+  
+        }
+
+        h2 {
+            text-align: center;
+        }
+    }
+
+    p {
+        padding: .5rem $gutter;
+        color: #333;
+        line-height: $leading;
+        margin: .5rem 0;
+    }
+
+    .features {
+        .column {
+            p.product-details, p.product-title, p.product-price {
+                margin: 0;
+            }
+
+            p.product-title {
+                color: $secondaryColor;
+                font-weight: $normalWeight;
+                font-size: .95rem;
+                letter-spacing: .01em;
+            }
+
+            p.product-price {
+                display: inline-block;
+                width: fit-content;
+                margin: .6rem $gutter 1rem $gutter;
+                padding: .25rem .65rem;
+                border-radius: 999px;
+                color: $primaryColor;
+                background-color: rgba(31, 127, 85, .12);
+                font-weight: 700;
+                font-size: .95rem;
+                line-height: 1.2;
+            }
+        }
+    }
+
+}// end main
+
+
+// create a for loop to generate classes for the grid system
+
+@for $i from 1 through 12 {
+    $width: calc(($i / 12) * 100% - #{$gutter});
+    .small-#{$i} {flex-basis: $width;}
+}
+
+// add more classes to style the grid system for medium and large screens in their respective files
+
+.outer-border {
+    border: 1px solid none;
+
+}
+
+.radius {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.fill {
+    background-color: $primaryColor;
+
+}
+
+.shadow {
+    box-shadow: 0 10px 22px rgba(1, 55, 125, .14), 0 3px 8px rgba(13, 49, 58, .10);
+}
+
+
+/* --------------------------- FOOTER --------------------------- */
+#footerWrapper {
+    background-color: $primaryColor
+} // end footer wrapper
+
+footer {
+    font-size: .85rem;
+    padding: 1rem $gutter;
+    color: white;
+    text-align: center;
+    line-height: $leading;
+    a {color: white;}
+}// end footer

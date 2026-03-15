@@ -1,0 +1,67 @@
+/* NAVIGATION STUFF GOES HERE  */
+
+header {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+
+    span {
+        min-width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+#nav_container {
+    justify-self: end;
+
+    button{
+        display: none;
+    }
+
+    ul {
+        display: flex;
+        justify-content: flex-end;
+        width: auto;
+        gap: 1rem;
+        margin: 0;
+        padding: .5rem 0;
+        position: static;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        li {
+            list-style: none;
+            a{
+                text-decoration: none;
+                color: $secondaryColor;
+                font-weight: $normalWeight;
+            }
+
+            a:hover {
+                text-decoration: underline;
+                text-underline-offset: 4px;
+            }
+        }
+
+        li.active a {
+            background-color: $secondaryColor;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }   
+    }
+}
+
+main {
+    .row.latest-news {
+        .column img {
+            height: 150px;
+            object-fit: cover;
+        }
+    }
+}
+
+// create a for loop to generate classes for the grid system
+@for $i from 1 through 12 {
+    $width: calc(($i / 12) * 100% - #{$gutter});
+    .medium-#{$i} {flex-basis: $width;}
+}

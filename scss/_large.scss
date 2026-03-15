@@ -1,0 +1,22 @@
+header, nav, main {
+    max-width: 1280px;
+    margin: auto;
+}
+
+/* NAVIGATION STUFF GOES HERE  */
+
+
+main {
+    .row.latest-news {
+        .column img {
+            height: 230px;
+        }
+    }
+}
+
+
+// create a for loop to generate classes for the grid system
+@for $i from 1 through 12 {
+    $width: calc(($i / 12) * 100% - #{$gutter});
+    .large-#{$i} {flex-basis: $width;}
+}
